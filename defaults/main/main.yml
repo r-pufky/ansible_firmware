@@ -1,0 +1,18 @@
+---
+###############################################################################
+# Firmware Options
+###############################################################################
+# Enable firmware updates for system. Reboots system if firmware updates are
+# applied.
+#
+# Enable non-free-firmware repository or additional repositories; see
+# packages.yml.
+#
+# Reference:
+# * https://wiki.debian.org/Firmware
+
+# Timeout for reboot and firmware updates to apply (seconds). Default: 600.
+firmware_timeout: 600
+
+# Number of polling attempts between firmware_timeout (count). Default: 5.
+firmware_poll: 5

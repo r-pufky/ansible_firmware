@@ -1,0 +1,26 @@
+---
+###############################################################################
+# Firmware Packages
+###############################################################################
+# Enable non-free-firmware repository or additional repositories.
+#
+# Reference:
+# * https://wiki.debian.org/Firmware
+
+# System firmware packages to install. Default: [].
+firmware_packages: []
+
+# System firmware packages to remove. Default: [].
+firmware_packages_absent: []
+
+# Firmware apt sources to add.
+#
+# Additional APT sources for firmware installation. Configure non-free-firmware
+# in main APT management if using main debian repositories (DEB822 will
+# overwrite existing APT sources based on signing keys, potentially removing
+# configured APT sources if only non-free-firmware is specified).
+#
+# Uses r_pufky.srv.apt.apt_sources format.
+#
+# Default: [] (unmanaged).
+firmware_apt_sources: []
