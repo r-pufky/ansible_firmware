@@ -20,7 +20,7 @@ firmware_packages_absent: []
 # overwrite existing APT sources based on signing keys, potentially removing
 # configured APT sources if only non-free-firmware is specified).
 #
-# Uses r_pufky.srv.apt.apt_sources format.
+# Uses r_pufky.deb.apt.apt_sources format.
 #
 # Default: [] (unmanaged).
 firmware_apt_sources: []

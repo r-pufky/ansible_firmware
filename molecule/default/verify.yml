@@ -9,7 +9,7 @@
 
     - name: 'Default | verify | assert firmware package installed'
       ansible.builtin.assert:
-        quite: true
+        quiet: true
         that:
           - '"fwupd" in ansible_facts.packages'
-        fail_msg: 'fwupd should be installed.'
+        fail_msg: '✘ fwupd should be installed.'

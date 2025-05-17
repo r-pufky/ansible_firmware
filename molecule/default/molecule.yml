@@ -1,7 +1,13 @@
 ---
+###############################################################################
+# Default
+###############################################################################
 # VM's will not have upgradable firmware but will be able to install and run
 # fwupd without an issue. Test that role had no runtime errors and that the
 # firmware manager package has been installed.
+#
+# Tests:
+# * Verify fwupd package installed.
 
 dependency:
   name: 'galaxy'
@@ -18,8 +24,8 @@ provisioner:
   name: 'ansible'
   config_options:
     defaults:
-      interpreter_python: 'auto_silent'  # suppress warnings
-      callback_whitelist: 'profile_tasks, timer, yaml'  # output profiling info
+      interpreter_python: 'auto_silent'
+      callback_whitelist: 'profile_tasks, timer, yaml'
 platforms:
   - name: 'firmware-debian-12-vm-default'
     box: 'debian/bookworm64'

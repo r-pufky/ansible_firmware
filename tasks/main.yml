@@ -1,5 +1,4 @@
 ---
-# yamllint disable rule:line-length
 ###############################################################################
 # Firmware Upgrades
 ###############################################################################
@@ -18,7 +17,7 @@
 
 - name: 'Install packages'
   ansible.builtin.include_role:
-    name: 'r_pufky.srv.apt'
+    name: 'r_pufky.deb.apt'
   vars:
     apt_packages:
       - '{{ firmware_role_packages }}'
@@ -29,11 +28,21 @@
     apt_package_update_cache: true
 
 - name: 'Refresh metadata'
-  ansible.builtin.command: '/usr/bin/fwupdmgr refresh --force --assume-yes'
+  ansible.builtin.command:
+    argv:
+      - '/usr/bin/fwupdmgr'
+      - 'refresh'
+      - '--force'
+      - '--assume-yes'
   changed_when: false
 
 - name: 'Check for updates'
-  ansible.builtin.command: '/usr/bin/fwupdmgr get-updates --json --assume-yes'
+  ansible.builtin.command:
+    argv:
+      - '/usr/bin/fwupdmgr'
+      - 'get-updates'
+      - '--json'
+      - '--assume-yes'
   register: _firmware_check
   changed_when: false
 
@@ -45,7 +54,13 @@
   when: _firmware_check_json.Devices | length > 0
   block:
     - name: 'Updates found | apply'
-      ansible.builtin.command: '/usr/bin/fwupdmgr update --offline --no-reboot-check --assume-yes'
+      ansible.builtin.command:
+        argv:
+          - '/usr/bin/fwupdmgr'
+          - 'update'
+          - '--offline'
+          - '--no-reboot-check'
+          - '--assume-yes'
       become: true
       register: _firmware_reboot
       changed_when: true
@@ -54,6 +69,6 @@
       when: _firmware_reboot.rc == 0
       ansible.builtin.reboot:
         msg: |
-          System reboot to apply firmware updates. This will take a few minutes.
+          Reboot to apply firmware updates. This will take a few minutes.
       async: '{{ firmware_timeout | default(firmware_role_timeout) }}'
       poll: '{{ firmware_poll | default(firmware_role_poll) }}'

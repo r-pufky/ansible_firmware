@@ -4,6 +4,6 @@
   gather_facts: false
   become: true
   tasks:
-    - name: 'Default | converge | apply r_pufky.srv.firmware'
+    - name: 'Default | converge | apply r_pufky.deb.firmware'
       ansible.builtin.include_role:
-        name: 'r_pufky.srv.firmware'
+        name: 'r_pufky.deb.firmware'

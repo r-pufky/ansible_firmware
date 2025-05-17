@@ -4,14 +4,12 @@ Firmware update management.
 ## Requirements
 [supported platforms](https://github.com/r-pufky/ansible_firmware/blob/main/meta/main.yml)
 
-[collections/roles](https://github.com/r-pufky/ansible_firmware/blob/main/meta/requirements.yml)
-
 ## Role Variables
 [defaults](https://github.com/r-pufky/ansible_firmware/blob/main/defaults/main)
 
 ## Dependencies
-Part of the [r_pufky.srv](https://github.com/r-pufky/ansible_collection_srv)
-collection.
+**galaxy-ng** roles cannot be used independently. Part of
+[r_pufky.deb](https://github.com/r-pufky/ansible_collection_deb) collection.
 
 ## Example Playbook
 Add additional firmware repositories if needed. This will install firmware
@@ -31,11 +29,11 @@ Apply the base role
 ``` yaml
 - name: 'Update system firmware'
   ansible.builtin.include_role:
-    name: 'r_pufky.srv.firmware'
+    name: 'r_pufky.deb.firmware'
 ```
 
 ## Development
-Configure [environment](https://github.com/r-pufky/ansible_collection_srv/blob/main/docs/dev/environment/README.md)
+Configure [environment](https://github.com/r-pufky/ansible_collection_docs/blob/main/dev/environment/README.md)
 
 Run all unit tests:
 ``` bash
