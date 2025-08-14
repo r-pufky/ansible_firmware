@@ -1,13 +1,13 @@
 ---
-- name: 'Default | verify'
+- name: 'Verify'
   hosts: 'all'
   gather_facts: false
   become: true
   tasks:
-    - name: 'Default | verify | gather installed packages'
+    - name: 'Verify | gather installed packages'
       ansible.builtin.package_facts:
 
-    - name: 'Default | verify | assert firmware package installed'
+    - name: 'Verify | assert firmware package installed'
       ansible.builtin.assert:
         quiet: true
         that:
