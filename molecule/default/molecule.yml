@@ -27,12 +27,12 @@ provisioner:
       interpreter_python: 'auto_silent'
       callback_whitelist: 'profile_tasks, timer, yaml'
 platforms:
-  - name: 'firmware-debian-12-vm-default'
-    box: 'debian/bookworm64'
+  - name: 'firmware-debian-13-vm-default'
+    box: 'debian/testing64'
     memory: 4096
     cpus: 2
     interfaces:
-      - network_name: private_network  # network_name required
+      - network_name: private_network  # network_name required.
         auto_config: true
         type: 'dhcp'
 verifier:

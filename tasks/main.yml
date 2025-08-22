@@ -69,6 +69,10 @@
       when: _firmware_reboot.rc == 0
       ansible.builtin.reboot:
         msg: |
-          Reboot to apply firmware updates. This will take a few minutes.
+          ╭───────────────────────────────────────────────────────────────────╮
+          │                                                                   │
+          │  Reboot to apply firmware updates. This will take a few minutes.  │
+          │                                                                   │
+          ╰───────────────────────────────────────────────────────────────────╯
       async: '{{ firmware_timeout | default(firmware_role_timeout) }}'
       poll: '{{ firmware_poll | default(firmware_role_poll) }}'

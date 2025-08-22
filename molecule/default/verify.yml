@@ -12,4 +12,9 @@
         quiet: true
         that:
           - '"fwupd" in ansible_facts.packages'
-        fail_msg: '✘ fwupd should be installed.'
+        fail_msg: |
+          ╭───────────────────────────────────────────────────────────────────╮
+          │                                                                   │
+          │                    fwupd should be installed.                     │
+          │                                                                   │
+          ╰───────────────────────────────────────────────────────────────────╯
