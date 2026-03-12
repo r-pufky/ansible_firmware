@@ -3,19 +3,21 @@
 # Firmware Role Options
 ###############################################################################
 
-# Last time debian options were validated against a default configuration.
-firmware_role_validate_date: '2025-08-22'
-firmware_role_validate_release: 'trixie'
+firmware___release: "{{ {} | r_pufky.data.v3(
 
-# Default timeout for long actions (seconds).
-firmware_role_timeout: 600
+    _date='2026-03-08',
+    _debian='trixie',
+  ) }}"
 
-# Default number of polls (count).
-firmware_role_poll: 5
+firmware___app: "{{ {} | r_pufky.data.v3(
+
+    _timeout=600,
+    _poll=5,
+  ) }}"
 
 ###############################################################################
 # APT Packages
 ###############################################################################
 
-firmware_role_packages:
+firmware___packages:
   - 'fwupd'  # base firmware updater.

@@ -1,0 +1,36 @@
+---
+###############################################################################
+# Firmware Options
+###############################################################################
+# Enable firmware updates for system. Reboots system if firmware updates are
+# applied.
+#
+# Reference:
+# * https://wiki.debian.org/Firmware
+
+# Timeout for reboot and firmware updates to apply (seconds). Default: 600.
+firmware_srv_timeout: 600
+
+# Number of polling attempts between firmware_timeout (count). Default: 5.
+firmware_srv_poll: 5
+
+# Firmware Packages
+###############################################################################
+# Enable non-free-firmware repository or additional repositories to use for
+# firmware updates.
+#
+# Configure non-free-firmware in main APT management if using main debian
+# repositories (DEB822 will overwrite existing APT sources based on signing
+# keys, potentially removing configured APT sources if only non-free-firmware
+# is specified).
+#
+# Uses r_pufky.deb.apt.apt_sources format.
+
+# System firmware packages to install. Default: [].
+firmware_srv_packages: []
+
+# System firmware packages to remove. Default: [].
+firmware_srv_packages_absent: []
+
+# Firmware apt sources to add. Default: [] (unmanaged).
+firmware_srv_apt_sources: []

@@ -4,17 +4,14 @@
   gather_facts: false
   become: true
   tasks:
-    - name: 'Verify | gather installed packages'
+    - name: 'Verify | fact | query installed packages'
       ansible.builtin.package_facts:
 
-    - name: 'Verify | assert firmware package installed'
+    - name: 'Verify | assert | firmware package installed'
       ansible.builtin.assert:
         quiet: true
         that:
           - '"fwupd" in ansible_facts.packages'
         fail_msg: |
-          ╭───────────────────────────────────────────────────────────────────╮
-          │                                                                   │
-          │                    fwupd should be installed.                     │
-          │                                                                   │
-          ╰───────────────────────────────────────────────────────────────────╯
+
+          ✘ fwupd should be installed.

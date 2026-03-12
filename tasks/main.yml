@@ -15,19 +15,19 @@
 # * https://wiki.archlinux.org/title/Fwupd
 # * https://manpages.debian.org/unstable/fwupd/fwupdmgr.1.en.html
 
-- name: 'Install packages'
+- name: 'Install | packages'
   ansible.builtin.include_role:
     name: 'r_pufky.deb.apt'
   vars:
     apt_packages:
-      - '{{ firmware_role_packages }}'
-      - '{{ firmware_packages }}'
+      - '{{ firmware___packages }}'
+      - '{{ firmware_srv_packages }}'
     apt_packages_absent:
-      - '{{ firmware_packages_absent }}'
-    apt_sources: '{{ firmware_apt_sources }}'
-    apt_package_update_cache: true
+      - '{{ firmware_srv_packages_absent }}'
+    apt_sources: '{{ firmware_srv_apt_sources }}'
+    apt_srv_package_update_cache: true
 
-- name: 'Refresh metadata'
+- name: 'Upgrade | cmd | refresh metadata'
   ansible.builtin.command:
     argv:
       - '/usr/bin/fwupdmgr'
@@ -36,24 +36,24 @@
       - '--assume-yes'
   changed_when: false
 
-- name: 'Check for updates'
+- name: 'Upgrade | cmd | check for updates'
   ansible.builtin.command:
     argv:
       - '/usr/bin/fwupdmgr'
       - 'get-updates'
       - '--json'
       - '--assume-yes'
-  register: _firmware_check
+  register: firmware__check
   changed_when: false
 
-- name: 'Process update list'
+- name: 'Upgrade | fact | parse update list'
   ansible.builtin.set_fact:
-    _firmware_check_json: '{{ _firmware_check.stdout | from_json }}'
+    firmware__check_json: '{{ firmware__check.stdout | from_json }}'
 
-- name: 'Updates found'
-  when: _firmware_check_json.Devices | length > 0
+- name: 'Upgrade | updates found'
+  when: firmware__check_json.Devices | length > 0
   block:
-    - name: 'Updates found | apply'
+    - name: 'Upgrade | cmd | apply updates'
       ansible.builtin.command:
         argv:
           - '/usr/bin/fwupdmgr'
@@ -62,17 +62,15 @@
           - '--no-reboot-check'
           - '--assume-yes'
       become: true
-      register: _firmware_reboot
+      register: firmware__reboot
       changed_when: true
 
-    - name: 'Updates found | reboot'
-      when: _firmware_reboot.rc == 0
+    - name: 'Upgrade | reboot (~2 minutes) 🗘'
+      when: firmware__reboot.rc == 0
       ansible.builtin.reboot:
         msg: |
-          ╭───────────────────────────────────────────────────────────────────╮
-          │                                                                   │
-          │  Reboot to apply firmware updates. This will take a few minutes.  │
-          │                                                                   │
-          ╰───────────────────────────────────────────────────────────────────╯
-      async: '{{ firmware_timeout | default(firmware_role_timeout) }}'
-      poll: '{{ firmware_poll | default(firmware_role_poll) }}'
+
+          Rebooting to apply firmware updates (~2 minutes).
+
+      async: '{{ firmware_srv_timeout | default(firmware___app._timeout) }}'
+      poll: '{{ firmware_srv_poll | default(firmware___app._poll) }}'
