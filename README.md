@@ -9,7 +9,9 @@ Detailed variable use documented in defaults. See usage for role operation.
 
 * [defaults][j] - User configurable options.
 
-## Example Playbook
+## Usage
+
+### Example Playbooks
 Add additional firmware repositories if needed. This will install firmware
 packages and apply firmware updates for hardware.
 
@@ -36,13 +38,13 @@ molecule test --all
 
 ### [Releases][b]
 
- Release | Debian | Ansible | Notes
----------|--------|---------|-------
- 2.x.x   | 13     | 2.20    | Ansible 2.20, semantic versioning.
- 1.x.x   | 13     | 2.18    | Migrate to Debian Trixie.
- 0.x.x   | 12     | 2.18    | Migration from private repository.
+  Release | Debian | Ansible | Notes
+ ---------|--------|---------|-------
+  2.x.x   | 13     | 2.20    | Ansible 2.20, semantic versioning.
+  1.x.x   | 13     | 2.18    | Migrate to Debian Trixie.
+  0.x.x   | 12     | 2.18    | Migration from private repository.
 
-### Issues
+## Issues
 Create a bug and provide as much information as possible.
 
 Associate pull requests with a submitted bug.
